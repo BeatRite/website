@@ -1,0 +1,55 @@
+{
+  "name": "beatrite-website",
+  "version": "1.0.0",
+  "description": "BeatRite - Predictive healthcare monitoring technology website",
+  "main": "dist/index.html",
+  "scripts": {
+    "dev": "live-server . --port=3000 --open=/src/index.html --ignore=node_modules,dist,.git",
+    "build": "npm run build:clean && npm run build:html && npm run build:css && npm run build:js && npm run build:assets",
+    "build:clean": "rm -rf dist && mkdir -p dist dist/assets/css dist/assets/js dist/assets/images",
+    "build:html": "cp src/index.html dist/",
+    "build:css": "cp assets/css/main.css dist/assets/css/",
+    "build:js": "cp assets/js/main.js dist/assets/js/",
+    "build:assets": "cp -r assets/images/* dist/assets/images/ 2>/dev/null || :",
+    "preview": "live-server dist --port=3001 --open=/index.html",
+    "lint:html": "htmlhint src/*.html",
+    "lint:css": "stylelint assets/css/*.css",
+    "lint:js": "eslint assets/js/*.js",
+    "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
+    "optimize": "npm run optimize:css && npm run optimize:js",
+    "optimize:css": "postcss assets/css/main.css -o dist/assets/css/main.min.css --use autoprefixer cssnano",
+    "optimize:js": "terser assets/js/main.js -o dist/assets/js/main.min.js --compress --mangle",
+    "deploy": "npm run build && npm run optimize",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "healthcare",
+    "medical-technology",
+    "predictive-monitoring",
+    "patient-care",
+    "website"
+  ],
+  "author": "BeatRite",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "cssnano": "^6.0.1",
+    "eslint": "^8.54.0",
+    "htmlhint": "^1.1.4",
+    "live-server": "^1.2.2",
+    "postcss": "^8.4.32",
+    "postcss-cli": "^11.0.0",
+    "stylelint": "^15.11.0",
+    "stylelint-config-standard": "^34.0.0",
+    "terser": "^5.24.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "maintained node versions"
+  ]
+}
