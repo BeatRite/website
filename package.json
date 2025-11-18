@@ -7,7 +7,7 @@
     "dev": "live-server . --port=3000 --open=/src/index.html --ignore=node_modules,dist,.git",
     "build": "npm run build:clean && npm run build:html && npm run build:css && npm run build:js && npm run build:assets",
     "build:clean": "rm -rf dist && mkdir -p dist dist/assets/css dist/assets/js dist/assets/images",
-    "build:html": "cp src/index.html dist/",
+    "build:html": "cp src/*.html dist/",
     "build:css": "cp assets/css/main.css dist/assets/css/",
     "build:js": "cp assets/js/main.js dist/assets/js/",
     "build:assets": "cp -r assets/images/* dist/assets/images/ 2>/dev/null || :",

@@ -38,14 +38,14 @@
 
     <!-- Enhanced Navigation -->
     <nav id="navbar" role="navigation" aria-label="Main navigation">
-        <div class="logo-container">
-            <div class="logo-icon" aria-hidden="true">B</div>
-            <div class="logo-text">
-                <h1>BeatRite</h1>
-                <span>EVOLVED SYSTEM</span>
-            </div>
+        <div class="logo-container" onclick="window.location.href='index.html'">
+            <img src="/assets/images/BR-full-logo.png" alt="BeatRite" class="logo-full" />
         </div>
-        <button class="nav-cta" type="button">Partner With Us</button>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link active">Home</a>
+            <a href="team.html" class="nav-link">Our Team</a>
+            <button class="nav-cta" type="button">Partner With Us</button>
+        </div>
     </nav>
 
     <!-- Main Content -->
@@ -54,34 +54,84 @@
         <section class="hero" aria-labelledby="hero-heading">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h2 id="hero-heading">Early Detection <br/>Saves <span class="gradient-text">Lives</span></h2>
-                    <p>We're building predictive monitoring technology that identifies patient deterioration before it becomes critical—giving clinicians the time they need to intervene and prevent readmissions.</p>
+                    <div class="hero-heading-wrapper">
+                        <h2 id="hero-heading">
+                            <span class="word word-1">Early</span>
+                            <span class="word word-2">Detection</span>
+                            <br/>
+                            <span class="word word-3">Saves</span>
+                            <span class="gradient-text word word-4">Lives</span>
+                        </h2>
+                    </div>
+                    <p class="hero-description">We're building predictive monitoring technology that identifies patient deterioration before it becomes critical—giving clinicians the time they need to intervene and prevent readmissions.</p>
                     <div class="hero-buttons">
                         <button class="btn-primary" type="button">Partner With Us</button>
                         <button class="btn-secondary" type="button">Learn More</button>
                     </div>
                 </div>
                 <div class="hero-visual" aria-label="Healthcare monitoring visualization">
-                    <div class="device-card">
-                        <div class="pulse-visual" aria-label="Medical data visualization">
-                            <div class="pulse-line" aria-hidden="true"></div>
+                    <div class="monitoring-dashboard">
+                        <div class="dashboard-glow"></div>
+
+                        <!-- Dashboard Header -->
+                        <div class="dashboard-header">
+                            <div class="device-status">
+                                <div class="status-indicator"></div>
+                                <span>LIVE MONITORING</span>
+                            </div>
+                            <div class="patient-id">Patient #4782</div>
                         </div>
-                        <div class="metrics-grid" role="grid" aria-label="Key metrics">
-                            <div class="metric" role="gridcell">
-                                <div class="metric-value">24/7</div>
-                                <div class="metric-label">Continuous</div>
+
+                        <!-- Wearable Device Visualization -->
+                        <div class="device-preview">
+                            <div class="device-illustration">
+                                <div class="patient-silhouette">
+                                    <div class="neck-area">
+                                        <div class="sensor-waves"></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="metric" role="gridcell">
-                                <div class="metric-value">AI</div>
-                                <div class="metric-label">Powered</div>
+                        </div>
+
+                        <!-- Vital Signs Grid -->
+                        <div class="vitals-grid">
+                            <div class="vital-card">
+                                <div class="vital-label">Heart Rate</div>
+                                <div class="vital-value" data-value="72">72 <span class="vital-unit">bpm</span></div>
+                                <div class="vital-graph">
+                                    <canvas id="hrGraph" width="100" height="30"></canvas>
+                                </div>
                             </div>
-                            <div class="metric" role="gridcell">
-                                <div class="metric-value">Real-time</div>
-                                <div class="metric-label">Analysis</div>
+
+                            <div class="vital-card">
+                                <div class="vital-label">SpO₂</div>
+                                <div class="vital-value" data-value="98">98 <span class="vital-unit">%</span></div>
+                                <div class="vital-graph">
+                                    <canvas id="spo2Graph" width="100" height="30"></canvas>
+                                </div>
                             </div>
-                            <div class="metric" role="gridcell">
-                                <div class="metric-value">Early</div>
-                                <div class="metric-label">Alerts</div>
+                        </div>
+
+                        <!-- AI Analysis Section -->
+                        <div class="ai-analysis">
+                            <div class="ai-icon">
+                                <div class="ai-pulse"></div>
+                            </div>
+                            <div class="ai-status">
+                                <div class="ai-label">AI Analysis</div>
+                                <div class="ai-text">Processing physiological patterns...</div>
+                            </div>
+                        </div>
+
+                        <!-- Early Warning Alert -->
+                        <div class="alert-banner">
+                            <div class="alert-icon"></div>
+                            <div class="alert-content">
+                                <div class="alert-title">Early Warning Detected</div>
+                                <div class="alert-message">Deterioration pattern identified • 72hr intervention window</div>
+                            </div>
+                            <div class="alert-action">
+                                <button class="alert-btn">Notify Care Team</button>
                             </div>
                         </div>
                     </div>

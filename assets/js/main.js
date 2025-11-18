@@ -69,10 +69,106 @@ const observer = new IntersectionObserver((entries) => {
 // Initialize animations when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Observe all animated elements
-    document.querySelectorAll('.stat-card, .solution-card, .flow-step').forEach(el => {
+    document.querySelectorAll('.stat-card, .solution-card, .flow-step, .team-member').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'all 0.6s ease';
         observer.observe(el);
     });
+    
+    // Set active navigation link based on current page
+    const currentPath = window.location.pathname;
+    const currentFile = currentPath.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        const linkFile = link.getAttribute('href');
+        if (linkFile === currentFile || 
+            (currentFile === '' && linkFile === 'index.html') ||
+            (currentPath.includes('team') && linkFile.includes('team')) ||
+            (currentPath === '/' && linkFile === 'index.html')) {
+            link.classList.add('active');
+        }
+    });
+    
+    // Vital Sign Graph Animations
+    const drawVitalGraph = (canvasId, color, type = 'normal') => {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        const width = canvas.width;
+        const height = canvas.height;
+        let offset = 0;
+
+        const animate = () => {
+            ctx.clearRect(0, 0, width, height);
+            ctx.beginPath();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+
+            // Different waveform patterns
+            for (let x = 0; x < width; x++) {
+                let y;
+
+                if (type === 'heart') {
+                    // ECG-like pattern
+                    const xOffset = (x + offset) % 40;
+                    if (xOffset < 5) {
+                        y = height / 2 + Math.sin(xOffset * 3) * 10;
+                    } else if (xOffset < 10) {
+                        y = height / 2 - (xOffset - 5) * 4;
+                    } else if (xOffset < 12) {
+                        y = height / 2 + (xOffset - 10) * 8;
+                    } else {
+                        y = height / 2 + Math.sin(x / 5) * 2;
+                    }
+                } else if (type === 'warning') {
+                    // Irregular IJV pattern
+                    y = height / 2 + Math.sin((x + offset) / 8) * 8 + Math.sin((x + offset) / 3) * 4;
+                } else {
+                    // Smooth SpO2 pattern
+                    y = height / 2 + Math.sin((x + offset) / 10) * 6;
+                }
+
+                if (x === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+
+            ctx.stroke();
+            offset += 0.5;
+            requestAnimationFrame(animate);
+        };
+
+        animate();
+    };
+
+    // Initialize vital graphs
+    drawVitalGraph('hrGraph', '#4ECDC4', 'heart');
+    drawVitalGraph('ijvGraph', '#FF6B45', 'warning');
+    drawVitalGraph('spo2Graph', '#4ECDC4', 'normal');
+
+    // Add mouse move parallax effect to monitoring dashboard
+    const dashboard = document.querySelector('.monitoring-dashboard');
+    if (dashboard) {
+        dashboard.addEventListener('mousemove', (e) => {
+            const rect = dashboard.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 30;
+            const rotateY = (centerX - x) / 30;
+
+            dashboard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        dashboard.addEventListener('mouseleave', () => {
+            dashboard.style.transform = '';
+        });
+    }
 });
