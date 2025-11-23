@@ -3,6 +3,32 @@
  * Main functionality for interactive elements and animations
  */
 
+// Configuration - fallback if config.js not loaded
+const getConfig = () => window.BEATRITE_CONFIG || {
+    CONTACT_EMAIL: 'contact@beatrite.com',
+    PARTNER_SUBJECT: 'Partnership Inquiry - BeatRite',
+    CONTACT_SUBJECT: 'General Inquiry - BeatRite'
+};
+
+// Smooth scroll helper function
+const smoothScrollTo = (elementId) => {
+    const element = document.querySelector(elementId);
+    if (element) {
+        element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+};
+
+// Handle CTA button clicks
+const handleContactClick = (type) => {
+    const config = getConfig();
+    const subject = type === 'partner' ? config.PARTNER_SUBJECT : config.CONTACT_SUBJECT;
+    const mailtoLink = `mailto:${config.CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}`;
+    window.location.href = mailtoLink;
+};
+
 // Navbar scroll effect
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
@@ -68,6 +94,27 @@ const observer = new IntersectionObserver((entries) => {
 
 // Initialize animations when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    // Setup CTA button event listeners
+    // "Partner With Us" buttons
+    document.querySelectorAll('.nav-cta, button.btn-primary').forEach(button => {
+        if (button.textContent.includes('Partner With Us') || button.textContent.includes('Get in Touch')) {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                handleContactClick(button.textContent.includes('Partner') ? 'partner' : 'contact');
+            });
+        }
+    });
+
+    // "Learn More" buttons - scroll to "How It Works" section
+    document.querySelectorAll('button.btn-secondary').forEach(button => {
+        if (button.textContent.includes('Learn More')) {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                smoothScrollTo('.how-section');
+            });
+        }
+    });
+
     // Observe all animated elements
     document.querySelectorAll('.stat-card, .solution-card, .flow-step, .team-member').forEach(el => {
         el.style.opacity = '0';

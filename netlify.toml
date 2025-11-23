@@ -1,0 +1,19 @@
+[build]
+  # Directory to publish (output of build)
+  publish = "dist"
+
+  # Build command to run
+  command = "npm run build"
+
+# Redirect all requests to HTTPS
+[[redirects]]
+  from = "http://*"
+  to = "https://:splat"
+  status = 301
+  force = true
+
+# SPA fallback (if you add routing later)
+# [[redirects]]
+#   from = "/*"
+#   to = "/index.html"
+#   status = 200
