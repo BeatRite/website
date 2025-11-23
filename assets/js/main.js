@@ -22,11 +22,9 @@ const smoothScrollTo = (elementId) => {
 };
 
 // Handle CTA button clicks
-const handleContactClick = (type) => {
-    const config = getConfig();
-    const subject = type === 'partner' ? config.PARTNER_SUBJECT : config.CONTACT_SUBJECT;
-    const mailtoLink = `mailto:${config.CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}`;
-    window.location.href = mailtoLink;
+const handleContactClick = () => {
+    // Navigate to contact page
+    window.location.href = 'contact.html';
 };
 
 // Navbar scroll effect
@@ -95,12 +93,12 @@ const observer = new IntersectionObserver((entries) => {
 // Initialize animations when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Setup CTA button event listeners
-    // "Partner With Us" buttons
+    // "Partner With Us" and "Get in Touch" buttons
     document.querySelectorAll('.nav-cta, button.btn-primary').forEach(button => {
         if (button.textContent.includes('Partner With Us') || button.textContent.includes('Get in Touch')) {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
-                handleContactClick(button.textContent.includes('Partner') ? 'partner' : 'contact');
+                handleContactClick();
             });
         }
     });

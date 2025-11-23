@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact BeatRite - Get in touch with our team to discuss partnerships and collaboration opportunities.">
+    <meta name="keywords" content="BeatRite contact, healthcare partnerships, medical device collaboration">
+    <meta name="author" content="BeatRite">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <title>Contact Us | BeatRite</title>
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main" class="sr-only">Skip to main content</a>
+
+    <!-- Enhanced Navigation -->
+    <nav id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="logo-container" onclick="window.location.href='index.html'">
+            <img src="/assets/images/BR-full-logo.png" alt="BeatRite" class="logo-full" />
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="team.html" class="nav-link">Our Team</a>
+            <button class="nav-cta" type="button" onclick="window.location.href='contact.html'">Partner With Us</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main">
+        <!-- Contact Section -->
+        <section class="contact-section" aria-labelledby="contact-heading">
+            <div class="contact-wrapper">
+                <span class="section-tag">Let's Connect</span>
+
+                <h1 id="contact-heading" class="contact-title">
+                    Partner With <span class="gradient-text">BeatRite</span>
+                </h1>
+
+                <p class="contact-subtitle">
+                    We're building the future of predictive healthcare monitoring. Whether you're an investor,
+                    hospital partner, or healthcare innovator—we'd love to hear from you.
+                </p>
+
+                <div class="contact-email-box">
+                    <div class="email-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <div class="email-content">
+                        <div class="email-label">Email</div>
+                        <a href="mailto:info@beatrite.com" class="email-address">info@beatrite.com</a>
+                    </div>
+                    <button class="copy-btn" onclick="copyEmail()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span id="copyText">Copy</span>
+                    </button>
+                </div>
+
+                <div class="contact-footer">
+                    <a href="index.html" class="back-link">← Back to Home</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="/config.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script>
+        // Copy email to clipboard
+        function copyEmail() {
+            const email = 'info@beatrite.com';
+            navigator.clipboard.writeText(email).then(() => {
+                const copyText = document.getElementById('copyText');
+                const originalText = copyText.textContent;
+                copyText.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyText.textContent = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Email: ' + email);
+            });
+        }
+    </script>
+</body>
+</html>
