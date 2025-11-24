@@ -1210,6 +1210,9 @@ section {
     border: 2px solid transparent;
     position: relative;
     overflow: hidden;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
 }
 
 .team-member::before {
@@ -1232,6 +1235,25 @@ section {
     transform: translateY(-10px);
     border-color: var(--primary-orange);
     box-shadow: 0 25px 70px rgba(255, 107, 69, 0.2);
+}
+
+.team-member::after {
+    content: 'View LinkedIn Profile →';
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-orange);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    white-space: nowrap;
+}
+
+.team-member:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
 
 .member-avatar {
@@ -1294,6 +1316,12 @@ section {
     font-size: 0.95rem;
     color: var(--text-gray);
     line-height: 1.7;
+    margin-bottom: 2rem;
+    transition: color 0.3s ease;
+}
+
+.team-member:hover .member-bio {
+    color: var(--text-dark);
 }
 
 /* Hamburger Menu */
